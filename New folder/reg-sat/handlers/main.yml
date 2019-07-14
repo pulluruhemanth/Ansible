@@ -1,0 +1,6 @@
+---
+# handlers file for reg-sat
+- name: Enable Katello Agent
+  service: name=goferd enabled=yes
+- name: Start Katello Agent
+  service: name=goferd state=started

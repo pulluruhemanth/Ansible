@@ -1,0 +1,10 @@
+---
+# tasks file for post_check
+- name: Deploying post check script
+  copy: src=/var/ansible/data/post.sh dest=/tmp/post.sh
+
+- name: Performing post check
+  command: sh /tmp/post.sh
+
+- name: Cleanup of deployed script
+  file: path=/tmp/post.sh state=absent

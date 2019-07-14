@@ -1,0 +1,13 @@
+---
+# tasks file for meltdown_check
+
+- name: Deploy the wget package
+  yum: pacakge=wget state=present
+
+- name: Download the spectre-meltdown script
+  shell: wget -O /tmp/spectre-meltdown.sh http://lpsata10/pub/spectre-meltdown.sh
+
+- name: Update debugfs entry in /etc/fstab
+  lineinfile:
+    line: "debugfs                 /sys/kernel/debug       debugfs          defaults        0 0"
+    path: /etc/fstab

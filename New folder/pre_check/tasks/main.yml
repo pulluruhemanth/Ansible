@@ -1,0 +1,11 @@
+---
+# tasks file for pre_check
+- name: Deploying prechecks script
+  copy: src=/var/ansible/data/pre.sh dest=/tmp/pre.sh mode=0777
+
+- name: Performing precheck
+  command: sh /tmp/pre.sh
+
+- name: Cleaning up deployed script
+  file: path=/tmp/pre.sh state=absent
+

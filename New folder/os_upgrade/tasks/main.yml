@@ -1,0 +1,15 @@
+---
+# tasks file for os_upgrade
+- name: OS Upgrade initiated via ansible
+  hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
+  roles:
+    - role: reg-sat
+    - role: pre_check
+    - role: reboot
+    - role: deploy_upgrade
+    - role: history
+    - role: second-reboot
+    - role: post_check
