@@ -1,0 +1,8 @@
+---
+# tasks file for history
+- name: Set the history parameters
+  lineinfile:
+    path: /etc/bashrc
+    line: 'HISTTIMEFORMAT="%d/%m/%y %T "'
+  tags: history
+ 

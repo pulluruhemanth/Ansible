@@ -1,0 +1,30 @@
+---
+# tasks file for reg-sat
+#- name: Install katello certificate
+#  shell: "/usr/bin/rpm -ivh http://lpsata10/pub/katello-ca-consumer-latest.noarch.rpm"
+#  yum:
+#    name: http://lpsata10/pub/katello-ca-consumer-latest.noarch.rpm
+#    state: present
+#  ignore_errors: yes
+
+#- name: Register with satellite
+#  shell: subscription-manager register --org="" --activationkey="KEY RHEL7.4" --release=7.4 --force
+#  ignore_errors: yes
+#  register: registered
+
+- name: Enable Repositories
+  command: sudo subscription-manager repos --enable=rhel-*-server-rpms --enable=rhel-*-server-satellite-tools-*-rpms --enable=rhel-*-server-rh-common-rpms
+#  when: registered|success
+
+- name: Install Katello Agent
+  yum: name=katello-agent state=latest
+#  when: registered|success
+  notify:
+  - Enable Katello Agent
+  - Start Katello Agent
+
+- name: Install katello-host-tools
+  yum: name=katello-host-tools state=latest
+
+#- name: Upload data to satellite
+#  command: katello-package-upload

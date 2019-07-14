@@ -1,0 +1,5 @@
+---
+# tasks file for deploy_upgrade
+- name: OS upgrade is in progress
+  yum: name=* state=latest update_cache=yes
+
